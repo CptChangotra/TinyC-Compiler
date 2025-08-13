@@ -1,32 +1,32 @@
-# 🔧 TinyC Compiler
+# 🔧 TinyC Compiler Frontend
 
 [![Java](https://img.shields.io/badge/Java-8%2B-orange.svg)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-Academic-blue.svg)](#license)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](#building-and-testing)
 
-A complete compiler implementation for the TinyC programming language, featuring lexical analysis, parsing, semantic analysis, code generation, and formal verification capabilities.
+A compiler frontend implementation for the TinyC programming language, featuring complete lexical analysis, parsing, and semantic analysis components with comprehensive AST generation.
 
 ## ✨ Features
 
 - 🔍 **Lexical Analysis**: Complete tokenization with comprehensive error handling
 - 🌳 **Syntax Analysis**: Recursive descent parser for TinyC grammar
 - ✅ **Semantic Analysis**: Type checking, scope resolution, and semantic validation
-- ⚡ **Code Generation**: Assembly code generation with optimization support
-- 🔐 **Formal Verification**: Integration with Z3 solver for program verification
 - 🛠️ **AST Support**: Complete Abstract Syntax Tree representation
 - 📊 **Diagnostic System**: Comprehensive error reporting with location tracking
+- 🔧 **Modular Design**: Clean separation of compiler phases
+- 📝 **Extensive Testing**: Comprehensive test suite for all implemented components
 
 ## 🏗️ Architecture
 
 ### Core Components
 
-| Component | Description |
-|-----------|-------------|
-| **Lexer** | 📝 Tokenizes source code into lexical units |
-| **Parser** | 🌳 Builds Abstract Syntax Tree from tokens |
-| **Semantic Analyzer** | ✅ Performs type checking and scope resolution |
-| **Code Generator** | ⚙️ Produces optimized assembly code |
-| **Verifier** | 🔐 Generates verification conditions for Z3 |
+| Component | Description | Status |
+|-----------|-------------|--------|
+| **Lexer** | 📝 Tokenizes source code into lexical units | ✅ Implemented |
+| **Parser** | 🌳 Builds Abstract Syntax Tree from tokens | ✅ Implemented |
+| **Semantic Analyzer** | ✅ Performs type checking and scope resolution | ✅ Implemented |
+| **AST Factory** | 🏭 Creates and manages AST nodes | ✅ Implemented |
+| **Diagnostic System** | 📊 Error reporting and location tracking | ✅ Implemented |
 
 ### Project Structure
 
@@ -58,8 +58,7 @@ A complete compiler implementation for the TinyC programming language, featuring
 ### Prerequisites
 
 - Java 8 or higher
-- Z3 SMT Solver (for verification features)
-- Make (optional, for build scripts)
+- JUnit (for running tests)
 
 ### Compilation
 
@@ -67,34 +66,29 @@ A complete compiler implementation for the TinyC programming language, featuring
 # Compile the entire project
 javac -cp libs/*:src -d bin src/tinycc/**/*.java
 
-# Or use the provided scripts
+# Or use the provided scripts (if available)
 ./scripts/build.sh
 ```
 
 ### Basic Usage
 
 ```bash
-# Compile a TinyC program
-java -cp bin:libs/* tinycc.driver.TinyC -c program.c
+# Parse and analyze a TinyC program (frontend only)
+java -cp bin:libs/* tinycc.driver.TinyC program.c
 
-# Compile with optimization
-java -cp bin:libs/* tinycc.driver.TinyC -O -c program.c
-
-# Verify program correctness
-java -cp bin:libs/* tinycc.driver.TinyC -v program.c
-
-# Compile and specify output file
-java -cp bin:libs/* tinycc.driver.TinyC -c -o output.s program.c
+# Run with verbose output for debugging
+java -cp bin:libs/* tinycc.driver.TinyC -verbose program.c
 ```
 
-## 📋 Command Line Options
+## 📋 Implemented Features
 
-| Option | Description |
-|--------|-------------|
-| `-c` | Compile to assembly code |
-| `-O` | Enable optimizations |
-| `-v` | Perform formal verification |
-| `-o <file>` | Specify output file |
+| Feature | Description | Status |
+|---------|-------------|--------|
+| **Lexical Analysis** | Complete tokenization and lexing | ✅ Complete |
+| **Syntax Analysis** | Recursive descent parser | ✅ Complete |
+| **AST Generation** | Abstract Syntax Tree construction | ✅ Complete |
+| **Semantic Analysis** | Type checking and scope resolution | ✅ Complete |
+| **Error Reporting** | Comprehensive diagnostic system | ✅ Complete |
 
 ## 🔤 TinyC Language Features
 
@@ -136,55 +130,32 @@ java -cp bin:libs/* org.junit.runner.JUnitCore prog2.tests.pub.AllTests
 
 ### Test Categories
 
-- **Parser Tests**: Syntax analysis validation
+- **AST Tests**: Abstract Syntax Tree construction validation
+- **Parser Tests**: Syntax analysis and grammar compliance
 - **Semantic Tests**: Type checking and scope resolution
-- **CodeGen Tests**: Assembly generation verification
-- **Verification Tests**: Formal verification capabilities
+- **Expression Tests**: Binary and unary expression handling
+- **Statement Tests**: Control flow and statement validation
 
-## ⚙️ Compiler Phases
+## ⚙️ Implemented Compiler Phases
 
-### 1. Lexical Analysis
-- Tokenizes source code
-- Handles comments and whitespace
-- Reports lexical errors with precise locations
+### 1. Lexical Analysis ✅
+- Complete tokenization of source code
+- Handles comments, whitespace, and string literals
+- Reports lexical errors with precise location information
+- Supports all TinyC tokens and keywords
 
-### 2. Syntax Analysis
-- Recursive descent parser
-- Builds complete AST
-- Syntax error recovery
+### 2. Syntax Analysis ✅
+- Recursive descent parser implementation
+- Builds complete Abstract Syntax Tree (AST)
+- Comprehensive grammar support for TinyC
+- Error recovery and reporting
 
-### 3. Semantic Analysis
-- Type checking and inference
-- Symbol table management
-- Scope resolution
-- Declaration/usage validation
-
-### 4. Code Generation
-- Three-address code intermediate representation
-- Register allocation
-- Assembly code emission
-- Optimization passes (with `-O` flag)
-
-### 5. Verification (Optional)
-- Generates verification conditions
-- Z3 SMT solver integration
-- Formal correctness proofs
-
-## 🔧 Optimization Features
-
-When using the `-O` flag:
-- **Constant Folding**: Compile-time expression evaluation
-- **Dead Code Elimination**: Removes unreachable code
-- **Register Allocation**: Efficient register usage
-- **Peephole Optimization**: Local code improvements
-
-## 🔐 Verification System
-
-The integrated verification system:
-1. Transforms programs into logical formulas
-2. Uses Z3 SMT solver for satisfiability checking
-3. Provides formal correctness guarantees
-4. Reports verification results with detailed feedback
+### 3. Semantic Analysis ✅
+- Type checking and type inference
+- Symbol table management across scopes
+- Scope resolution and variable binding
+- Function signature validation
+- Declaration and usage consistency checks
 
 ## 🛠️ Development
 
@@ -210,8 +181,8 @@ This project is developed for academic purposes and follows educational use guid
 
 ## 👨‍💻 Author
 
-Developed with ❤️ for compiler construction and formal verification.
+Developed with ❤️ for compiler construction and programming language theory.
 
 ---
 
-*A complete compiler implementation demonstrating modern compiler design principles and formal verification techniques.*
+*A robust compiler frontend implementation demonstrating modern compiler design principles through lexical analysis, parsing, and semantic analysis.*
