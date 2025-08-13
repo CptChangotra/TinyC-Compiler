@@ -1,4 +1,4 @@
-# 🔧 TinyC Compiler Frontend
+# 🔧 TinyC Compiler
 
 [![Java](https://img.shields.io/badge/Java-8%2B-orange.svg)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-Academic-blue.svg)](#license)
